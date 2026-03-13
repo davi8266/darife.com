@@ -84,5 +84,42 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 sections.forEach(s => observer.observe(s));
 
+// ── Sombra no nav ao rolar ──
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 10) {
+    nav.style.boxShadow = '0 4px 24px rgba(194, 24, 91, 0.10)';
+    nav.style.borderBottom = '1px solid #C2185B40';
+  } else {
+    nav.style.boxShadow = 'none';
+    nav.style.borderBottom = '1px solid #C2185B20';
+  }
+});
+
 // Inicia
 loadSite();
+
+// ── Scroll reveal ──
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    } else {
+      entry.target.classList.remove('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// Revela cards de projeto dinamicamente após carregar
+const projectObserver = new MutationObserver(() => {
+  document.querySelectorAll('.project-card:not(.observed)').forEach((card, i) => {
+    card.classList.add('reveal', 'observed');
+    card.style.transitionDelay = (i * 0.1) + 's';
+    revealObserver.observe(card);
+  });
+});
+projectObserver.observe(document.getElementById('projects-grid'), { childList: true });

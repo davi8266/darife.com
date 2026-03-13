@@ -44,6 +44,8 @@ nav {
   background: #F9F9F9ee;
   backdrop-filter: blur(12px);
   z-index: 100;
+  box-shadow: none;
+  transition: box-shadow 0.3s ease;
 }
 
 .logo {
@@ -388,8 +390,9 @@ footer {
   padding: 2.5rem;
   font-family: var(--mono);
   font-size: 0.73rem;
-  color: #333333;
-  border-top: 1px solid #C2185B20;
+  color: #F8F0F5;
+  background: #1A000D;
+  border-top: 3px solid #C2185B;
   margin-top: 2rem;
 }
 
@@ -414,3 +417,36 @@ footer {
   opacity: 1;
   background: #C2185B;
 }
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
