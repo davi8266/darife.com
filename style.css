@@ -84,12 +84,12 @@ nav {
   align-items: center;
   gap: 8px;
   background: #C2185B12;
-  border: 1px solid #5a5a5a30;
+  border: 1px solid #C2185B30;
   border-radius: 99px;
   padding: 7px 16px;
   font-family: var(--mono);
   font-size: 0.72rem;
-  color: #000000;
+  color: #F48FB1;
   margin-bottom: 2.5rem;
   letter-spacing: 0.04em;
 }
@@ -97,7 +97,7 @@ nav {
 .badge-dot {
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: #ff0000;
+  background: #F48FB1;
   animation: pulse 2s infinite;
 }
 
@@ -397,3 +397,20 @@ footer {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #F9F9F9; }
 ::-webkit-scrollbar-thumb { background: #C2185B; border-radius: 99px; }
+
+/* ─── ADMIN TRIGGER ─── */
+#admin-trigger {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  margin-left: 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+#admin-trigger:hover {
+  opacity: 1;
+  background: #C2185B;
+}
