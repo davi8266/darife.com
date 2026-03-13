@@ -1,6 +1,6 @@
 // ⚠️ SUBSTITUA com suas credenciais do Supabase (as mesmas do admin)
-const SUPABASE_URL = 'SUA_SUPABASE_URL';
-const SUPABASE_KEY = 'SUA_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://tqxozexxqfjcshkeuwdg.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_jUM3JtKDEZhZNRfBuISMXA_eDwpgmuG';
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
