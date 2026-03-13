@@ -104,6 +104,25 @@
           contato@darife.com
         </a>
       </div>
+
+      <div class="contact-form reveal" id="contact-form">
+        <div class="contact-form-row">
+          <div class="contact-form-group">
+            <label>Nome</label>
+            <input type="text" id="form-name" placeholder="Seu nome" />
+          </div>
+          <div class="contact-form-group">
+            <label>Email</label>
+            <input type="email" id="form-email" placeholder="seu@email.com" />
+          </div>
+        </div>
+        <div class="contact-form-group">
+          <label>Mensagem</label>
+          <textarea id="form-message" placeholder="Conta o que você tem em mente..."></textarea>
+        </div>
+        <div id="form-feedback"></div>
+        <button class="btn-send" id="btn-send" onclick="sendMessage()">Enviar mensagem →</button>
+      </div>
     </div>
   </section>
 

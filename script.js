@@ -96,6 +96,42 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// ── Formulário de contato ──
+async function sendMessage() {
+  const name    = document.getElementById('form-name').value.trim();
+  const email   = document.getElementById('form-email').value.trim();
+  const message = document.getElementById('form-message').value.trim();
+  const btn      = document.getElementById('btn-send');
+  const feedback = document.getElementById('form-feedback');
+
+  if (!name || !email || !message) {
+    feedback.className = 'feedback-error';
+    feedback.textContent = '⚠ Preencha todos os campos.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  feedback.textContent = '';
+
+  const { error } = await sb.from('messages').insert({ name, email, message });
+
+  if (error) {
+    feedback.className = 'feedback-error';
+    feedback.textContent = '✗ Erro ao enviar. Tente novamente.';
+    btn.disabled = false;
+    btn.textContent = 'Enviar mensagem →';
+  } else {
+    feedback.className = 'feedback-success';
+    feedback.textContent = '✓ Mensagem enviada! Em breve entrarei em contato.';
+    document.getElementById('form-name').value = '';
+    document.getElementById('form-email').value = '';
+    document.getElementById('form-message').value = '';
+    btn.disabled = false;
+    btn.textContent = 'Enviar mensagem →';
+  }
+}
+
 // Inicia
 loadSite();
 
