@@ -324,9 +324,15 @@
   }
 
   async function saveSkills() {
-    await sb.rpc('clear_skills');
-    const rows = skills.map((s, i) => ({ name: s.name, order: i }));
-    if (rows.length > 0) await sb.from('skills').insert(rows);
+    const existingIds = skills.filter(s => s.id).map(s => s.id);
+    if (existingIds.length > 0) {
+      await sb.from('skills').delete().not('id', 'in', '(' + existingIds.join(',') + ')');
+    } else {
+      await sb.from('skills').delete().gte('id', 0);
+    }
+    const rows = skills.map((s, i) => ({ id: s.id || (i + 1), name: s.name, order: i }));
+    if (rows.length > 0) await sb.from('skills').upsert(rows, { onConflict: 'id' });
+    await loadSkills();
     showToast('✓ Skills salvas!');
   }
 
@@ -382,9 +388,15 @@
   }
 
   async function saveProjects() {
-    await sb.rpc('clear_projects');
-    const rows = projects.map((p, i) => ({ name: p.name, icon: p.icon, description: p.description, tags: p.tags, link: p.link, order: i }));
-    if (rows.length > 0) await sb.from('projects').insert(rows);
+    const existingIds = projects.filter(p => p.id).map(p => p.id);
+    if (existingIds.length > 0) {
+      await sb.from('projects').delete().not('id', 'in', '(' + existingIds.join(',') + ')');
+    } else {
+      await sb.from('projects').delete().gte('id', 0);
+    }
+    const rows = projects.map((p, i) => ({ id: p.id || (i + 1), name: p.name, icon: p.icon, description: p.description, tags: p.tags, link: p.link, order: i }));
+    if (rows.length > 0) await sb.from('projects').upsert(rows, { onConflict: 'id' });
+    await loadProjects();
     showToast('✓ Projetos salvos!');
   }
 
