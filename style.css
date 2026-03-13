@@ -1,13 +1,13 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --c1: #FF6B6B;
-  --c2: #FFE66D;
-  --c3: #4ECDC4;
-  --c4: #A855F7;
-  --c5: #F97316;
-  --dark: #0f0f13;
-  --card: #1a1a24;
+  --c1: #C2185B;
+  --c2: #F48FB1;
+  --c3: #F48FB1;
+  --c4: #C2185B;
+  --c5: #AD1457;
+  --dark: #0D0006;
+  --card: #1A000D;
   --mono: 'Space Mono', monospace;
   --display: 'Syne', sans-serif;
 }
@@ -89,7 +89,7 @@ nav {
   padding: 7px 16px;
   font-family: var(--mono);
   font-size: 0.72rem;
-  color: var(--c3);
+  color: #F48FB1;
   margin-bottom: 2.5rem;
   letter-spacing: 0.04em;
 }
@@ -97,13 +97,13 @@ nav {
 .badge-dot {
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: var(--c3);
+  background: #F48FB1;
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0%,100% { opacity: 1; box-shadow: 0 0 0 0 #4ECDC466; }
-  50%      { opacity: 0.5; box-shadow: 0 0 0 5px #4ECDC400; }
+  0%,100% { opacity: 1; box-shadow: 0 0 0 0 #F48FB166; }
+  50%      { opacity: 0.5; box-shadow: 0 0 0 5px #F48FB100; }
 }
 
 h1 {
@@ -126,7 +126,7 @@ h1 .greeting {
 
 h1 .name {
   display: block;
-  background: linear-gradient(135deg, var(--c1) 0%, var(--c5) 45%, var(--c4) 100%);
+  background: linear-gradient(135deg, #2D0A1E 0%, #C2185B 45%, #F48FB1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -144,7 +144,7 @@ h1 .name {
 
 .btn-primary {
   padding: 13px 30px;
-  background: var(--c4);
+  background: #C2185B;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -196,11 +196,11 @@ h1 .name {
   transition: transform 0.15s;
 }
 .skill-tag:hover { transform: translateY(-2px); }
-.t1 { background: #FF6B6B18; color: var(--c1); border: 1px solid #FF6B6B35; }
-.t2 { background: #4ECDC418; color: var(--c3); border: 1px solid #4ECDC435; }
-.t3 { background: #A855F718; color: var(--c4); border: 1px solid #A855F735; }
-.t4 { background: #F9731618; color: var(--c5); border: 1px solid #F9731635; }
-.t5 { background: #FFE66D18; color: var(--c2); border: 1px solid #FFE66D35; }
+.t1 { background: #C2185B18; color: #F48FB1; border: 1px solid #C2185B35; }
+.t2 { background: #AD145718; color: #F06292; border: 1px solid #AD145735; }
+.t3 { background: #88003318; color: #F48FB1; border: 1px solid #88003335; }
+.t4 { background: #C2185B18; color: #FCB8CF; border: 1px solid #C2185B35; }
+.t5 { background: #F48FB118; color: #F8C8D8; border: 1px solid #F48FB135; }
 
 /* ─── SECTION ─── */
 .section {
@@ -212,7 +212,7 @@ h1 .name {
 .section-label {
   font-family: var(--mono);
   font-size: 0.7rem;
-  color: var(--c4);
+  color: #C2185B;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   margin-bottom: 2rem;
@@ -261,7 +261,7 @@ h1 .name {
 .stat-num {
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--c1), var(--c4));
+  background: linear-gradient(135deg, #C2185B, #F48FB1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: block;
@@ -299,9 +299,9 @@ h1 .name {
   top: 0; left: 0;
   width: 100%; height: 3px;
 }
-.project-card.p1::before { background: linear-gradient(90deg, var(--c1), var(--c5)); }
-.project-card.p2::before { background: linear-gradient(90deg, var(--c3), var(--c4)); }
-.project-card.p3::before { background: linear-gradient(90deg, var(--c4), var(--c1)); }
+.project-card.p1::before { background: linear-gradient(90deg, #2D0A1E, #C2185B); }
+.project-card.p2::before { background: linear-gradient(90deg, #C2185B, #F48FB1); }
+.project-card.p3::before { background: linear-gradient(90deg, #F48FB1, #2D0A1E); }
 .project-card:hover { border-color: #ffffff28; transform: translateY(-4px); }
 
 .project-icon {
@@ -311,9 +311,9 @@ h1 .name {
   font-size: 20px;
   margin-bottom: 1rem;
 }
-.p1 .project-icon { background: #FF6B6B18; }
-.p2 .project-icon { background: #4ECDC418; }
-.p3 .project-icon { background: #A855F718; }
+.p1 .project-icon { background: #C2185B18; }
+.p2 .project-icon { background: #AD145718; }
+.p3 .project-icon { background: #88003318; }
 
 .project-card h3 {
   font-size: 1.05rem;
@@ -341,8 +341,8 @@ h1 .name {
 
 /* ─── CONTACT ─── */
 .contact-box {
-  background: linear-gradient(135deg, #A855F714, #FF6B6B0e);
-  border: 1px solid #A855F730;
+  background: linear-gradient(135deg, #2D0A1E40, #C2185B18);
+  border: 1px solid #C2185B30;
   border-radius: 18px;
   padding: 3rem 2rem;
   text-align: center;
@@ -396,4 +396,4 @@ footer {
 /* ─── SCROLLBAR ─── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--dark); }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 99px; }
+::-webkit-scrollbar-thumb { background: #2D0A1E; border-radius: 99px; }
