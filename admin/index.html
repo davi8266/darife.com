@@ -217,8 +217,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // ⚠️ SUBSTITUA com suas credenciais do Supabase
-  const SUPABASE_URL = 'https://tqxozexxqfjcshkeuwdg.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_jUM3JtKDEZhZNRfBuISMXA_eDwpgmuG';
+  const SUPABASE_URL = 'SUA_SUPABASE_URL';
+  const SUPABASE_KEY = 'SUA_SUPABASE_ANON_KEY';
 
   const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -324,9 +324,9 @@
   }
 
   async function saveSkills() {
-    await sb.from('skills').delete().neq('id', 0);
+    await sb.rpc('clear_skills');
     const rows = skills.map((s, i) => ({ name: s.name, order: i }));
-    await sb.from('skills').insert(rows);
+    if (rows.length > 0) await sb.from('skills').insert(rows);
     showToast('✓ Skills salvas!');
   }
 
@@ -382,9 +382,9 @@
   }
 
   async function saveProjects() {
-    await sb.from('projects').delete().neq('id', 0);
-    const rows = projects.map((p, i) => ({ ...p, order: i, id: undefined }));
-    await sb.from('projects').insert(rows);
+    await sb.rpc('clear_projects');
+    const rows = projects.map((p, i) => ({ name: p.name, icon: p.icon, description: p.description, tags: p.tags, link: p.link, order: i }));
+    if (rows.length > 0) await sb.from('projects').insert(rows);
     showToast('✓ Projetos salvos!');
   }
 
