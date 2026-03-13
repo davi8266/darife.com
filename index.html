@@ -11,7 +11,7 @@
 <body>
 
   <nav>
-    <div class="logo">dawid.dev</div>
+    <div class="logo">darife.com</div>
     <ul class="nav-links">
       <li><a href="#sobre">sobre</a></li>
       <li><a href="#projetos">projetos</a></li>
@@ -23,13 +23,13 @@
   <section class="hero">
     <div class="badge">
       <span class="badge-dot"></span>
-      disponível para projetos
+      <span id="hero-status">disponível para projetos</span>
     </div>
     <h1>
       <span class="greeting">// olá, eu sou</span>
       <span class="name">Dawid Rizzo.</span>
     </h1>
-    <p class="hero-sub">
+    <p class="hero-sub" id="hero-subtitle">
       Desenvolvedor que transforma ideias em soluções digitais funcionais.<br>
       Do front-end ao banco de dados, construo do início ao fim.
     </p>
@@ -40,7 +40,7 @@
   </section>
 
   <!-- SKILLS -->
-  <div class="skills-strip">
+  <div class="skills-strip" id="skills-strip">
     <span class="skill-tag t1">HTML</span>
     <span class="skill-tag t2">CSS</span>
     <span class="skill-tag t3">JavaScript</span>
@@ -53,20 +53,9 @@
     <div class="section-label">sobre mim</div>
     <div class="about-grid">
       <div class="about-text">
-        <p>
-          Sou o <span>Dawid Rizzo</span>, desenvolvedor com foco em criar
-          soluções web completas — desde interfaces visuais até lógicas
-          de backend e banco de dados.
-        </p>
-        <p>
-          Trabalho com <span>HTML, CSS e JavaScript</span> no front-end,
-          <span>Python</span> para automações e scripts, e
-          <span>SQL Server</span> para modelagem e consultas de dados.
-        </p>
-        <p>
-          Gosto de código limpo, interfaces que funcionam de verdade
-          e de resolver problemas do jeito mais eficiente possível.
-        </p>
+        <p id="bio-p1">Sou o <span>Dawid Rizzo</span>, desenvolvedor com foco em criar soluções web completas — desde interfaces visuais até lógicas de backend e banco de dados.</p>
+        <p id="bio-p2">Trabalho com <span>HTML, CSS e JavaScript</span> no front-end, <span>Python</span> para automações e scripts, e <span>SQL Server</span> para modelagem e consultas de dados.</p>
+        <p id="bio-p3">Gosto de código limpo, interfaces que funcionam de verdade e de resolver problemas do jeito mais eficiente possível.</p>
       </div>
       <div class="about-stats">
         <div class="stat-card">
@@ -92,31 +81,8 @@
   <!-- PROJETOS -->
   <section class="section" id="projetos">
     <div class="section-label">projetos em destaque</div>
-    <div class="projects-grid">
-      <div class="project-card p1">
-        <div class="project-icon">🌐</div>
-        <h3>Projeto Web</h3>
-        <p>Interface responsiva com HTML e CSS puro, focada em performance e experiência do usuário.</p>
-        <div class="project-tags">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span>
-        </div>
-      </div>
-      <div class="project-card p2">
-        <div class="project-icon">🐍</div>
-        <h3>Automação Python</h3>
-        <p>Script de automação que processa dados e gera relatórios conectando ao banco SQL Server.</p>
-        <div class="project-tags">
-          <span>Python</span><span>SQL Server</span>
-        </div>
-      </div>
-      <div class="project-card p3">
-        <div class="project-icon">🗄️</div>
-        <h3>Dashboard de Dados</h3>
-        <p>Painel visual interativo com consultas dinâmicas ao banco de dados e gráficos em tempo real.</p>
-        <div class="project-tags">
-          <span>JavaScript</span><span>SQL Server</span><span>CSS</span>
-        </div>
-      </div>
+    <div class="projects-grid" id="projects-grid">
+      <!-- carregado dinamicamente -->
     </div>
   </section>
 
@@ -133,6 +99,10 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
           github.com/davi8266
         </a>
+        <a class="contact-link" id="contact-email" href="mailto:contato@darife.com">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+          contato@darife.com
+        </a>
       </div>
     </div>
   </section>
@@ -141,6 +111,7 @@
     darife.com — feito com código e muita determinação por Dawid Rizzo ☕
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
 </body>
 </html>
