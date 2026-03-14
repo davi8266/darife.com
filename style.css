@@ -595,3 +595,105 @@ footer {
 [data-theme="dark"] .stat-card {
   background: #1A000D;
 }
+
+/* ─── DARK MODE GLOBAL FIX ─── */
+[data-theme="dark"] body {
+  color: #F8F0F5;
+}
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] a {
+  color: #F8F0F5;
+}
+[data-theme="dark"] .hero-sub {
+  color: #C9A0B0;
+}
+[data-theme="dark"] h1 .greeting {
+  color: #8A5570;
+}
+[data-theme="dark"] .nav-links a {
+  color: #8A5570;
+}
+[data-theme="dark"] .nav-links a:hover {
+  color: #F8F0F5;
+}
+[data-theme="dark"] .about-text p {
+  color: #C9A0B0;
+}
+[data-theme="dark"] .about-text p span {
+  color: #F48FB1;
+}
+[data-theme="dark"] .project-card p {
+  color: #8A5570;
+}
+[data-theme="dark"] .project-tags span {
+  color: #8A5570;
+  background: #2D0A1E;
+  border-color: #3D1A2E;
+}
+[data-theme="dark"] .skill-tag {
+  color: #F48FB1;
+  background: #2D0A1E;
+  border-color: #C2185B35;
+}
+[data-theme="dark"] .contact-box p {
+  color: #C9A0B0;
+}
+[data-theme="dark"] .contact-box h2 {
+  color: #F8F0F5;
+}
+[data-theme="dark"] .nav-email {
+  color: #8A5570;
+}
+[data-theme="dark"] .project-num {
+  color: #8A5570;
+}
+[data-theme="dark"] .message-date {
+  color: #8A5570;
+}
+[data-theme="dark"] nav {
+  background: #0D0006ee;
+  border-bottom-color: #2D0A1E;
+}
+[data-theme="dark"] .skills-strip {
+  background: transparent;
+}
+
+/* ─── DARK MODE TEXT BRIGHTNESS FIX ─── */
+[data-theme="dark"] body,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] li {
+  color: #F0E0E8;
+}
+[data-theme="dark"] .hero-sub,
+[data-theme="dark"] .about-text p,
+[data-theme="dark"] .contact-box p,
+[data-theme="dark"] .project-card p {
+  color: #D4AABB;
+}
+[data-theme="dark"] h1 .greeting,
+[data-theme="dark"] .nav-links a,
+[data-theme="dark"] .stat-label,
+[data-theme="dark"] .project-num,
+[data-theme="dark"] .project-tags span,
+[data-theme="dark"] .message-date {
+  color: #B07888;
+}
+[data-theme="dark"] .nav-links a:hover,
+[data-theme="dark"] .about-text p span,
+[data-theme="dark"] .contact-box h2,
+[data-theme="dark"] .project-card h3 {
+  color: #FADADD;
+}
+[data-theme="dark"] .skill-tag {
+  color: #F4B8CC;
+  background: #2D0A1E;
+  border-color: #C2185B40;
+}
