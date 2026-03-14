@@ -843,15 +843,15 @@ footer {
   border: 1px solid var(--border-accent);
   border-radius: 18px;
   width: 100%;
-  max-width: 600px;
+  max-width: 580px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  transform: translateY(24px);
+  transform: translateY(24px) scale(0.98);
   transition: transform 0.3s ease;
 }
 .modal-overlay.open .modal-box {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 .modal-close {
   position: absolute;
@@ -872,77 +872,122 @@ footer {
   transition: background 0.2s, color 0.2s;
   line-height: 1;
 }
-.modal-close:hover {
-  background: #C2185B;
-  color: #fff;
-  border-color: #C2185B;
-}
+.modal-close:hover { background: #C2185B; color: #fff; border-color: #C2185B; }
+
+/* Imagens - Carrossel */
 .modal-images {
   width: 100%;
-  min-height: 8px;
   border-radius: 18px 18px 0 0;
   overflow: hidden;
+  background: #000;
+  position: relative;
 }
 .modal-images img {
   width: 100%;
-  max-height: 260px;
-  object-fit: cover;
+  height: 260px;
+  object-fit: contain;
   display: block;
+  background: #0D0006;
 }
-.modal-images-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(13,0,6,0.6);
+  border: 1px solid #C2185B40;
+  color: #F48FB1;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transition: background 0.2s;
 }
-.modal-images-grid img {
-  max-height: 160px;
+.carousel-btn:hover { background: #C2185B; color: #fff; }
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
+.carousel-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
 }
-.modal-content {
-  padding: 1.75rem;
+.carousel-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #ffffff50;
+  cursor: pointer;
+  transition: background 0.2s;
 }
+.carousel-dot.active { background: #F48FB1; }
+
+/* Conteúdo */
+.modal-content { padding: 1.75rem; }
+
+/* Topo: ícone + título + período */
 .modal-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
   margin-bottom: 1.25rem;
 }
 .modal-icon {
-  font-size: 2rem;
-  line-height: 1;
-  margin-top: 4px;
+  font-size: 2.2rem;
+  width: 52px; height: 52px;
+  background: #C2185B12;
+  border: 1px solid #C2185B25;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
 }
+.modal-header-text { flex: 1; }
 .modal-header h2 {
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  margin-bottom: 4px;
   color: var(--text-primary);
-}
-.modal-meta {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
+  margin-bottom: 5px;
 }
 .modal-period {
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--text-muted);
   background: var(--bg-card2);
   border: 1px solid var(--border);
   padding: 3px 10px;
   border-radius: 99px;
+  display: inline-block;
 }
+
+/* Descrição */
 .modal-description {
   font-family: var(--mono);
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.85;
   margin-bottom: 1.25rem;
+}
+
+/* Seção tecnologias */
+.modal-section-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
 }
 .modal-tags {
   display: flex;
-  gap: 8px;
+  gap: 7px;
   flex-wrap: wrap;
   margin-bottom: 1.5rem;
 }
@@ -950,12 +995,19 @@ footer {
   font-family: var(--mono);
   font-size: 0.72rem;
   color: #C2185B;
-  background: #C2185B12;
+  background: #C2185B10;
   border: 1px solid #C2185B30;
   padding: 4px 12px;
   border-radius: 6px;
 }
-.modal-actions { display: flex; gap: 10px; }
+
+/* Ações */
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
 .modal-btn {
   display: inline-flex;
   align-items: center;
@@ -965,29 +1017,69 @@ footer {
 .project-card { cursor: pointer; }
 
 /* Dark mode modal */
-[data-theme="dark"] .modal-box {
-  background: #1A000D;
-  border-color: #C2185B35;
-}
-[data-theme="dark"] .modal-close {
-  background: #2D0A1E;
-  color: #F48FB1;
-}
-[data-theme="dark"] .modal-period {
-  background: #2D0A1E;
-  border-color: #3D1A2E;
-  color: #B07888;
-}
-[data-theme="dark"] .modal-description {
-  color: #D4AABB;
-}
-[data-theme="dark"] .modal-header h2 {
-  color: #FADADD;
-}
+[data-theme="dark"] .modal-box { background: #1A000D; border-color: #C2185B35; }
+[data-theme="dark"] .modal-close { background: #2D0A1E; color: #F48FB1; }
+[data-theme="dark"] .modal-period { background: #2D0A1E; border-color: #3D1A2E; color: #B07888; }
+[data-theme="dark"] .modal-description { color: #D4AABB; }
+[data-theme="dark"] .modal-header h2 { color: #FADADD; }
+[data-theme="dark"] .modal-header { border-bottom-color: #2D0A1E; }
+[data-theme="dark"] .modal-actions { border-top-color: #2D0A1E; }
+[data-theme="dark"] .modal-section-label { color: #8A5570; }
+[data-theme="dark"] .modal-icon { background: #2D0A1E; border-color: #C2185B35; }
 
 /* Mobile modal */
 @media (max-width: 768px) {
   .modal-box { max-height: 95vh; border-radius: 14px; }
   .modal-content { padding: 1.25rem; }
-  .modal-images img { max-height: 200px; }
+  .modal-images img { max-height: 180px; }
 }
+
+/* ─── LIGHTBOX ─── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  cursor: zoom-out;
+}
+.lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.lightbox img {
+  max-width: 92vw;
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: 8px;
+  transform: scale(0.95);
+  transition: transform 0.25s ease;
+  cursor: default;
+}
+.lightbox.open img {
+  transform: scale(1);
+}
+.lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.lightbox-close:hover { background: #C2185B; }
+.modal-images img { cursor: zoom-in; }

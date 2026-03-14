@@ -87,17 +87,30 @@ function openModal(i) {
     linkEl.style.display = 'none';
   }
 
-  // Images
+  // Carrossel de imagens
   const imagesEl = document.getElementById('modal-images');
-  const imgs = p.images || [];
-  if (imgs.length === 1) {
-    imagesEl.innerHTML = `<img src="${imgs[0]}" alt="${p.name}" />`;
-    imagesEl.className = 'modal-images';
-  } else if (imgs.length > 1) {
-    imagesEl.innerHTML = `<div class="modal-images-grid">${imgs.map(src => `<img src="${src}" alt="${p.name}" />`).join('')}</div>`;
-    imagesEl.className = 'modal-images';
-  } else {
+  const imgs = (p.images || []).filter(s => s && s.startsWith('http'));
+  if (imgs.length === 0) {
     imagesEl.innerHTML = '';
+    imagesEl.style.display = 'none';
+  } else {
+    imagesEl.style.display = 'block';
+    let current = 0;
+    const render = () => {
+      imagesEl.innerHTML = `
+        <img src="${imgs[current]}" alt="${p.name}" onclick="openLightbox('${imgs[current]}')" />
+        ${imgs.length > 1 ? `
+          <button class="carousel-btn carousel-prev" onclick="carouselPrev()">‹</button>
+          <button class="carousel-btn carousel-next" onclick="carouselNext()">›</button>
+          <div class="carousel-dots">
+            ${imgs.map((_, i) => `<div class="carousel-dot ${i === current ? 'active' : ''}" onclick="carouselGo(${i})"></div>`).join('')}
+          </div>` : ''}
+      `;
+    };
+    window.carouselPrev = () => { current = (current - 1 + imgs.length) % imgs.length; render(); };
+    window.carouselNext = () => { current = (current + 1) % imgs.length; render(); };
+    window.carouselGo  = (i) => { current = i; render(); };
+    render();
   }
 
   document.getElementById('project-modal').classList.add('open');
@@ -187,6 +200,22 @@ async function sendMessage() {
     btn.textContent = 'Enviar mensagem →';
   }
 }
+
+// ── Lightbox ──
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
 
 // ── Tema escuro/claro ──
 function toggleTheme() {
