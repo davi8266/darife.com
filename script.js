@@ -42,24 +42,81 @@ async function loadSkills() {
 }
 
 // ── Projects ──
+let allProjects = [];
+
 async function loadProjects() {
   const { data } = await sb.from('projects').select('*').order('order');
   if (!data || data.length === 0) return;
+  allProjects = data;
 
   const grid = document.getElementById('projects-grid');
   grid.innerHTML = data.map((p, i) => {
     const cls = PROJECT_CLASSES[i % PROJECT_CLASSES.length];
     const tags = (p.tags || []).map(t => `<span>${t}</span>`).join('');
-    const link = p.link ? `href="${p.link}" target="_blank" rel="noopener"` : '';
     return `
-      <a class="project-card ${cls}" ${link}>
+      <div class="project-card ${cls}" onclick="openModal(${i})">
         <div class="project-icon">${p.icon || '🚀'}</div>
         <h3>${p.name || ''}</h3>
         <p>${p.description || ''}</p>
         <div class="project-tags">${tags}</div>
-      </a>`;
+      </div>`;
   }).join('');
 }
+
+// ── Modal ──
+function openModal(i) {
+  const p = allProjects[i];
+  if (!p) return;
+
+  document.getElementById('modal-icon').textContent = p.icon || '🚀';
+  document.getElementById('modal-title').textContent = p.name || '';
+  document.getElementById('modal-description').textContent = p.long_description || p.description || '';
+  document.getElementById('modal-period').textContent = p.period || '';
+  document.getElementById('modal-period').style.display = p.period ? 'inline-block' : 'none';
+
+  // Tags
+  const tagsEl = document.getElementById('modal-tags');
+  tagsEl.innerHTML = (p.tags || []).map(t => `<span>${t}</span>`).join('');
+
+  // GitHub link
+  const linkEl = document.getElementById('modal-link');
+  if (p.link) {
+    linkEl.href = p.link;
+    linkEl.style.display = 'inline-flex';
+  } else {
+    linkEl.style.display = 'none';
+  }
+
+  // Images
+  const imagesEl = document.getElementById('modal-images');
+  const imgs = p.images || [];
+  if (imgs.length === 1) {
+    imagesEl.innerHTML = `<img src="${imgs[0]}" alt="${p.name}" />`;
+    imagesEl.className = 'modal-images';
+  } else if (imgs.length > 1) {
+    imagesEl.innerHTML = `<div class="modal-images-grid">${imgs.map(src => `<img src="${src}" alt="${p.name}" />`).join('')}</div>`;
+    imagesEl.className = 'modal-images';
+  } else {
+    imagesEl.innerHTML = '';
+  }
+
+  document.getElementById('project-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModalDirect() {
+  document.getElementById('project-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModal(e) {
+  if (e.target.id === 'project-modal') closeModalDirect();
+}
+
+// Fechar com ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModalDirect();
+});
 
 // ── Scroll suave ──
 document.addEventListener('click', e => {

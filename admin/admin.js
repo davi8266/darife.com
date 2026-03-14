@@ -144,16 +144,30 @@
           </div>
         </div>
         <div class="form-group">
-          <label>Descrição</label>
+          <label>Descrição curta (card)</label>
           <textarea onchange="projects[${i}].description = this.value">${p.description || ''}</textarea>
         </div>
         <div class="form-group">
-          <label>Tags (separadas por vírgula)</label>
-          <input type="text" value="${(p.tags || []).join(', ')}" onchange="projects[${i}].tags = this.value.split(',').map(t => t.trim())" />
+          <label>Descrição longa (modal)</label>
+          <textarea onchange="projects[${i}].long_description = this.value">${p.long_description || ''}</textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tags (separadas por vírgula)</label>
+            <input type="text" value="${(p.tags || []).join(', ')}" onchange="projects[${i}].tags = this.value.split(',').map(t => t.trim())" />
+          </div>
+          <div class="form-group">
+            <label>Período (ex: Jan 2024 – Mar 2024)</label>
+            <input type="text" value="${p.period || ''}" onchange="projects[${i}].period = this.value" placeholder="Jan 2024 – Mar 2024" />
+          </div>
         </div>
         <div class="form-group">
-          <label>Link do projeto (opcional)</label>
+          <label>Link do GitHub (opcional)</label>
           <input type="url" value="${p.link || ''}" onchange="projects[${i}].link = this.value" placeholder="https://github.com/..." />
+        </div>
+        <div class="form-group">
+          <label>URLs de imagens (separadas por vírgula)</label>
+          <input type="text" value="${(p.images || []).join(', ')}" onchange="projects[${i}].images = this.value.split(',').map(t => t.trim()).filter(Boolean)" placeholder="https://i.imgur.com/..." />
         </div>
       </div>
     `).join('');
@@ -176,7 +190,18 @@
     } else {
       await sb.from('projects').delete().gte('id', 0);
     }
-    const rows = projects.map((p, i) => ({ id: p.id || (i + 1), name: p.name, icon: p.icon, description: p.description, tags: p.tags, link: p.link, order: i }));
+    const rows = projects.map((p, i) => ({
+      id: p.id || (i + 1),
+      name: p.name,
+      icon: p.icon,
+      description: p.description,
+      long_description: p.long_description || '',
+      tags: p.tags,
+      link: p.link,
+      period: p.period || '',
+      images: p.images || [],
+      order: i
+    }));
     if (rows.length > 0) await sb.from('projects').upsert(rows, { onConflict: 'id' });
     await loadProjects();
     showToast('✓ Projetos salvos!');
