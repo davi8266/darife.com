@@ -370,6 +370,24 @@ function initTheme() {
   if (btn) btn.textContent = saved === 'dark' ? '🌙' : '☀️';
 }
 
+// ── Menu hambúrguer ──
+function toggleMenu() {
+  const links = document.getElementById('nav-links');
+  const btn = document.getElementById('nav-hamburger');
+  links.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('nav-links').classList.remove('open');
+  document.getElementById('nav-hamburger').classList.remove('open');
+}
+
+// Fechar menu ao clicar fora
+document.addEventListener('click', e => {
+  const nav = document.querySelector('nav');
+  if (!nav.contains(e.target)) closeMenu();
+});
+
 initTheme();
 
 // Inicia

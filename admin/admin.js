@@ -291,19 +291,9 @@
           <span class="project-num">ITEM ${i + 1}</span>
           <button class="btn-danger" onclick="removeCatalogo(${i})">Remover</button>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Título</label>
-            <input type="text" value="${item.titulo || ''}" onchange="catalogoItems[${i}].titulo = this.value" placeholder="Ex: Quadro Mandala" />
-          </div>
-          <div class="form-group">
-            <label>Tipo</label>
-            <select onchange="catalogoItems[${i}].tipo = this.value">
-              <option value="produto" ${item.tipo === 'produto' ? 'selected' : ''}>Produto</option>
-              <option value="antes-depois" ${item.tipo === 'antes-depois' ? 'selected' : ''}>Antes & Depois</option>
-              <option value="anuncio" ${item.tipo === 'anuncio' ? 'selected' : ''}>Anúncio</option>
-            </select>
-          </div>
+        <div class="form-group">
+          <label>Título</label>
+          <input type="text" value="${item.titulo || ''}" onchange="catalogoItems[${i}].titulo = this.value" placeholder="Ex: Quadro Mandala" />
         </div>
         <div class="form-group">
           <label>Descrição (opcional)</label>

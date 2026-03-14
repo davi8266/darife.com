@@ -12,12 +12,15 @@
 
   <nav>
     <div class="logo">darife.com</div>
-    <ul class="nav-links">
-      <li><a href="#sobre">sobre</a></li>
-      <li><a href="#design">design</a></li>
-      <li><a href="#catalogo">catálogo</a></li>
-      <li><a href="#projetos">projetos</a></li>
-      <li><a href="#contato">contato</a></li>
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#sobre" onclick="closeMenu()">sobre</a></li>
+      <li><a href="#design" onclick="closeMenu()">design</a></li>
+      <li><a href="#catalogo" onclick="closeMenu()">catálogo</a></li>
+      <li><a href="#projetos" onclick="closeMenu()">projetos</a></li>
+      <li><a href="#contato" onclick="closeMenu()">contato</a></li>
       <li><button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">☀️</button></li>
     </ul>
   </nav>
