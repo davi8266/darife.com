@@ -243,6 +243,7 @@
     document.getElementById('emp-nome').value = data.nome || '';
     document.getElementById('emp-desc').value = data.descricao || '';
     document.getElementById('emp-emoji').value = data.emoji || '🪵';
+    document.getElementById('emp-logo').value = data.logo || '';
   }
 
   async function saveEmpresa() {
@@ -250,6 +251,7 @@
       nome: document.getElementById('emp-nome').value,
       descricao: document.getElementById('emp-desc').value,
       emoji: document.getElementById('emp-emoji').value,
+      logo: document.getElementById('emp-logo').value,
     };
     const { data } = await sb.from('empresa').select('id').single();
     if (data) {
@@ -313,6 +315,31 @@
           <label>🛒 Foto do Anúncio</label>
           <input type="url" value="${item.img_anuncio || ''}" onchange="catalogoItems[${i}].img_anuncio = this.value" placeholder="https://..." />
         </div>
+        <div style="font-family:var(--mono);font-size:0.68rem;color:#999;letter-spacing:0.08em;text-transform:uppercase;margin:1rem 0 0.5rem;padding-top:0.75rem;border-top:1px solid var(--border);">Links e-commerce (opcional)</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Mercado Livre</label>
+            <input type="url" value="${item.link_mercadolivre || ''}" onchange="catalogoItems[${i}].link_mercadolivre = this.value" placeholder="https://produto.mercadolivre.com.br/..." />
+          </div>
+          <div class="form-group">
+            <label>Shopee</label>
+            <input type="url" value="${item.link_shopee || ''}" onchange="catalogoItems[${i}].link_shopee = this.value" placeholder="https://shopee.com.br/..." />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Magalu</label>
+            <input type="url" value="${item.link_magalu || ''}" onchange="catalogoItems[${i}].link_magalu = this.value" placeholder="https://www.magazineluiza.com.br/..." />
+          </div>
+          <div class="form-group">
+            <label>TikTok Shop</label>
+            <input type="url" value="${item.link_tiktok || ''}" onchange="catalogoItems[${i}].link_tiktok = this.value" placeholder="https://www.tiktok.com/..." />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Amazon</label>
+          <input type="url" value="${item.link_amazon || ''}" onchange="catalogoItems[${i}].link_amazon = this.value" placeholder="https://www.amazon.com.br/..." />
+        </div>
       </div>
     `).join('');
   }
@@ -337,6 +364,11 @@
       img_antes: item.img_antes || '',
       img_depois: item.img_depois || '',
       img_anuncio: item.img_anuncio || '',
+      link_mercadolivre: item.link_mercadolivre || '',
+      link_shopee: item.link_shopee || '',
+      link_magalu: item.link_magalu || '',
+      link_tiktok: item.link_tiktok || '',
+      link_amazon: item.link_amazon || '',
       order: i
     }));
     if (rows.length > 0) await sb.from('catalogo').upsert(rows, { onConflict: 'id' });

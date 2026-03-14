@@ -207,7 +207,12 @@ async function loadEmpresa() {
   if (!data) return;
   if (data.nome)      document.getElementById('empresa-nome').textContent = data.nome;
   if (data.descricao) document.getElementById('empresa-desc').textContent = data.descricao;
-  if (data.emoji)     document.getElementById('empresa-emoji').textContent = data.emoji;
+  const logoEl = document.getElementById('empresa-emoji');
+  if (data.logo) {
+    logoEl.innerHTML = `<img src="${data.logo}" alt="${data.nome || ''}" style="width:100%;height:100%;object-fit:contain;border-radius:10px;padding:4px;" />`;
+  } else {
+    logoEl.textContent = data.emoji || '🪵';
+  }
 }
 
 // ── Catálogo ──
@@ -231,7 +236,7 @@ async function loadCatalogo() {
     if (!hasBefore && !hasAfter && !item.img_anuncio) tipos.push('Produto');
     return `
       <div class="cat-card" onclick="openCatModal(${i})">
-        <div class="cat-card-thumb">
+        <div class="cat-card-img">
           ${thumb ? `<img src="${thumb}" alt="${item.titulo || 'item'}" />` : '<div class="cat-card-no-img">📷</div>'}
           <div class="cat-card-badge">${tipos.join(' · ')}</div>
         </div>
@@ -256,17 +261,51 @@ function openCatModal(i) {
   document.getElementById('cat-modal-tipo').textContent = tipos.join(' · ') || 'Produto';
 
   const imgsEl = document.getElementById('cat-modal-images');
-  let html = '';
-  if (item.img_antes || item.img_depois) {
-    html += '<div class="cat-antes-depois">';
-    if (item.img_antes) html += `<div class="cat-ad-block"><div class="cat-ad-label">Antes</div><img src="${item.img_antes}" onclick="openLightbox('${item.img_antes}')" /></div>`;
-    if (item.img_depois) html += `<div class="cat-ad-block"><div class="cat-ad-label">Depois</div><img src="${item.img_depois}" onclick="openLightbox('${item.img_depois}')" /></div>`;
-    html += '</div>';
+  const cols = [];
+  if (item.img_antes) cols.push(`
+    <div class="cat-compare-item">
+      <div class="cat-compare-label">Antes</div>
+      <img src="${item.img_antes}" alt="Antes" onclick="openLightbox('${item.img_antes}')" />
+    </div>`);
+  if (item.img_depois) cols.push(`
+    <div class="cat-compare-item">
+      <div class="cat-compare-label">Depois</div>
+      <img src="${item.img_depois}" alt="Depois" onclick="openLightbox('${item.img_depois}')" />
+    </div>`);
+  if (item.img_anuncio) cols.push(`
+    <div class="cat-compare-item">
+      <div class="cat-compare-label">Anúncio</div>
+      <img src="${item.img_anuncio}" alt="Anúncio" onclick="openLightbox('${item.img_anuncio}')" />
+    </div>`);
+  imgsEl.innerHTML = cols.length
+    ? `<div class="cat-modal-imgs">${cols.join('')}</div>`
+    : '';
+
+  // Links e-commerce
+  const linksEl = document.getElementById('cat-modal-links');
+  const stores = [
+    { key: 'link_mercadolivre', label: 'Mercado Livre', color: '#FFE600', text: '#333' },
+    { key: 'link_shopee',       label: 'Shopee',        color: '#EE4D2D', text: '#fff' },
+    { key: 'link_magalu',       label: 'Magalu',        color: '#0086FF', text: '#fff' },
+    { key: 'link_tiktok',       label: 'TikTok',        color: '#111',    text: '#fff' },
+    { key: 'link_amazon',       label: 'Amazon',        color: '#FF9900', text: '#111' },
+  ];
+
+  const activeLinks = stores.filter(s => item[s.key]);
+  if (activeLinks.length > 0) {
+    linksEl.innerHTML = `
+      <div class="cat-ecommerce-label">Disponível em</div>
+      <div class="cat-ecommerce-btns">
+        ${activeLinks.map(s => `
+          <a href="${item[s.key]}" target="_blank" rel="noopener" class="cat-ecommerce-btn" style="background:${s.color};color:${s.text};">
+            ${s.label}
+          </a>`).join('')}
+      </div>`;
+    linksEl.style.display = 'block';
+  } else {
+    linksEl.innerHTML = '';
+    linksEl.style.display = 'none';
   }
-  if (item.img_anuncio) {
-    html += `<div class="cat-anuncio-block"><div class="cat-ad-label">Anúncio</div><img src="${item.img_anuncio}" onclick="openLightbox('${item.img_anuncio}')" /></div>`;
-  }
-  imgsEl.innerHTML = html;
 
   document.getElementById('cat-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
