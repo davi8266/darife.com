@@ -1196,14 +1196,24 @@ footer {
 }
 .empresa-logo-placeholder {
   font-size: 3rem;
-  width: 72px; height: 72px;
-  background: #C2185B12;
-  border: 1px solid #C2185B25;
-  border-radius: 14px;
+  width: 88px;
+  height: 88px;
+  background: var(--bg-card2);
+  border: 1px solid var(--border-accent);
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(194,24,91,0.08);
+}
+.empresa-logo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+  padding: 6px;
 }
 .empresa-nome {
   font-size: 1.3rem;
@@ -1223,6 +1233,7 @@ footer {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 .empresa-badges span {
   font-family: var(--mono);
@@ -1233,6 +1244,34 @@ footer {
   padding: 3px 10px;
   border-radius: 4px;
 }
+.empresa-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+.empresa-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--c1);
+  background: #C2185B0D;
+  border: 1px solid #C2185B30;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.15s, border-color 0.2s;
+}
+.empresa-social-link:hover {
+  background: #C2185B;
+  color: #fff;
+  border-color: #C2185B;
+  transform: translateY(-2px);
+}
+.empresa-social-link svg { flex-shrink: 0; }
 
 /* ─── CATÁLOGO TABS ─── */
 .catalogo-tabs {
@@ -1309,10 +1348,15 @@ footer {
 [data-theme="dark"] .empresa-box { background: #1A000D; }
 [data-theme="dark"] .empresa-nome { color: #FADADD; }
 [data-theme="dark"] .empresa-desc { color: #D4AABB; }
+[data-theme="dark"] .empresa-logo-placeholder { background: #2D0A1E; border-color: #C2185B35; }
+[data-theme="dark"] .empresa-social-link { background: #2D0A1E; color: #F48FB1; border-color: #C2185B40; }
+[data-theme="dark"] .empresa-social-link:hover { background: #C2185B; color: #fff; }
 
 @media (max-width: 768px) {
   .empresa-box { flex-direction: column; gap: 1.25rem; }
-  
+  .empresa-logo-placeholder { width: 72px; height: 72px; font-size: 2.2rem; }
+  .empresa-links { gap: 6px; }
+  .empresa-social-link { font-size: 0.7rem; padding: 6px 12px; }
 }
 @media (max-width: 400px) {
   

@@ -244,6 +244,10 @@
     document.getElementById('emp-desc').value = data.descricao || '';
     document.getElementById('emp-emoji').value = data.emoji || '🪵';
     document.getElementById('emp-logo').value = data.logo || '';
+    document.getElementById('emp-instagram').value = data.link_instagram || '';
+    document.getElementById('emp-facebook').value = data.link_facebook || '';
+    document.getElementById('emp-whatsapp').value = data.link_whatsapp || '';
+    document.getElementById('emp-site').value = data.link_site || '';
   }
 
   async function saveEmpresa() {
@@ -252,6 +256,10 @@
       descricao: document.getElementById('emp-desc').value,
       emoji: document.getElementById('emp-emoji').value,
       logo: document.getElementById('emp-logo').value,
+      link_instagram: document.getElementById('emp-instagram').value,
+      link_facebook: document.getElementById('emp-facebook').value,
+      link_whatsapp: document.getElementById('emp-whatsapp').value,
+      link_site: document.getElementById('emp-site').value,
     };
     const { data } = await sb.from('empresa').select('id').single();
     if (data) {
