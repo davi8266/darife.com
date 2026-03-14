@@ -9,66 +9,108 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --c1: #FF6B6B; --c4: #A855F7; --c3: #4ECDC4;
-      --dark: #0f0f13; --card: #1a1a24;
-      --mono: 'Space Mono', monospace; --display: 'Syne', sans-serif;
+      --c1: #C2185B;
+      --mono: 'Space Mono', monospace;
+      --display: 'Syne', sans-serif;
     }
     body {
-      background: var(--dark); color: #fff;
+      background: #F9F9F9;
+      color: #111;
       font-family: var(--display);
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .login-box {
-      background: var(--card);
-      border: 1px solid #ffffff12;
+      background: #fff;
+      border: 1px solid #e0e0e0;
       border-radius: 18px;
       padding: 2.5rem 2rem;
-      width: 100%; max-width: 380px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 4px 32px rgba(194, 24, 91, 0.08);
     }
     .login-logo {
-      font-size: 1.3rem; font-weight: 800;
-      background: linear-gradient(90deg, var(--c1), var(--c4));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #2D0A1E, #C2185B, #F48FB1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 0.4rem;
     }
     .login-sub {
-      font-family: var(--mono); font-size: 0.72rem; color: #555;
-      margin-bottom: 2rem; letter-spacing: 0.04em;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: #999;
+      margin-bottom: 2rem;
+      letter-spacing: 0.04em;
     }
     label {
-      display: block; font-family: var(--mono); font-size: 0.72rem;
-      color: #666; letter-spacing: 0.06em; margin-bottom: 6px;
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: #999;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
     input {
-      width: 100%; padding: 11px 14px;
-      background: #0f0f13; border: 1px solid #ffffff18;
-      border-radius: 8px; color: #fff;
-      font-family: var(--mono); font-size: 0.85rem;
-      margin-bottom: 1rem; outline: none;
+      width: 100%;
+      padding: 11px 14px;
+      background: #F4F4F4;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      color: #111;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      outline: none;
       transition: border-color 0.2s;
     }
-    input:focus { border-color: var(--c4); }
+    input:focus { border-color: #C2185B; }
     .btn {
-      width: 100%; padding: 12px;
-      background: var(--c4); color: #fff; border: none;
-      border-radius: 8px; font-family: var(--display);
-      font-size: 0.9rem; font-weight: 700; cursor: pointer;
-      transition: opacity 0.2s;
+      width: 100%;
+      padding: 12px;
+      background: #C2185B;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
     }
-    .btn:hover { opacity: 0.85; }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .error {
-      background: #FF6B6B18; border: 1px solid #FF6B6B35;
-      border-radius: 8px; padding: 10px 14px;
-      font-family: var(--mono); font-size: 0.78rem; color: var(--c1);
-      margin-bottom: 1rem; display: none;
+      background: #C2185B12;
+      border: 1px solid #C2185B30;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: #C2185B;
+      margin-bottom: 1rem;
+      display: none;
     }
     .back {
-      display: block; text-align: center; margin-top: 1.5rem;
-      font-family: var(--mono); font-size: 0.72rem; color: #444;
-      text-decoration: none; transition: color 0.2s;
+      display: block;
+      text-align: center;
+      margin-top: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: #bbb;
+      text-decoration: none;
+      transition: color 0.2s;
     }
-    .back:hover { color: #888; }
+    .back:hover { color: #C2185B; }
+    .divider {
+      height: 1px;
+      background: #e0e0e0;
+      margin: 1.5rem 0;
+    }
   </style>
 </head>
 <body>
