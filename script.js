@@ -9,7 +9,7 @@ const PROJECT_CLASSES = ['p1', 'p2', 'p3'];
 
 // ── Carrega tudo ao iniciar ──
 async function loadSite() {
-  await Promise.all([loadBio(), loadSkills(), loadProjects()]);
+  await Promise.all([loadBio(), loadSkills(), loadProjects(), loadEmpresa(), loadCatalogo()]);
 }
 
 // ── Bio ──
@@ -201,6 +201,85 @@ async function sendMessage() {
   }
 }
 
+// ── Empresa ──
+async function loadEmpresa() {
+  const { data } = await sb.from('empresa').select('*').single();
+  if (!data) return;
+  if (data.nome)      document.getElementById('empresa-nome').textContent = data.nome;
+  if (data.descricao) document.getElementById('empresa-desc').textContent = data.descricao;
+  if (data.emoji)     document.getElementById('empresa-emoji').textContent = data.emoji;
+}
+
+// ── Catálogo ──
+let allCatalogo = [];
+
+async function loadCatalogo() {
+  const { data } = await sb.from('catalogo').select('*').order('order');
+  allCatalogo = data || [];
+  const grid = document.getElementById('catalogo-grid');
+  if (allCatalogo.length === 0) {
+    grid.innerHTML = '<p class="catalogo-hint">Nenhum item adicionado ainda.</p>';
+    return;
+  }
+  grid.innerHTML = allCatalogo.map((item, i) => {
+    const thumb = item.img_antes || item.img_depois || item.img_anuncio || '';
+    const hasBefore = !!item.img_antes;
+    const hasAfter = !!item.img_depois;
+    const tipos = [];
+    if (hasBefore || hasAfter) tipos.push('Antes & Depois');
+    if (item.img_anuncio) tipos.push('Anúncio');
+    if (!hasBefore && !hasAfter && !item.img_anuncio) tipos.push('Produto');
+    return `
+      <div class="cat-card" onclick="openCatModal(${i})">
+        <div class="cat-card-thumb">
+          ${thumb ? `<img src="${thumb}" alt="${item.titulo || 'item'}" />` : '<div class="cat-card-no-img">📷</div>'}
+          <div class="cat-card-badge">${tipos.join(' · ')}</div>
+        </div>
+        <div class="cat-card-info">
+          <h3>${item.titulo || 'Sem título'}</h3>
+          ${item.descricao ? `<p>${item.descricao}</p>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function openCatModal(i) {
+  const item = allCatalogo[i];
+  if (!item) return;
+  document.getElementById('cat-modal-title').textContent = item.titulo || 'Sem título';
+  document.getElementById('cat-modal-desc').textContent = item.descricao || '';
+  document.getElementById('cat-modal-desc').style.display = item.descricao ? 'block' : 'none';
+
+  const tipos = [];
+  if (item.img_antes || item.img_depois) tipos.push('Antes & Depois');
+  if (item.img_anuncio) tipos.push('Anúncio');
+  document.getElementById('cat-modal-tipo').textContent = tipos.join(' · ') || 'Produto';
+
+  const imgsEl = document.getElementById('cat-modal-images');
+  let html = '';
+  if (item.img_antes || item.img_depois) {
+    html += '<div class="cat-antes-depois">';
+    if (item.img_antes) html += `<div class="cat-ad-block"><div class="cat-ad-label">Antes</div><img src="${item.img_antes}" onclick="openLightbox('${item.img_antes}')" /></div>`;
+    if (item.img_depois) html += `<div class="cat-ad-block"><div class="cat-ad-label">Depois</div><img src="${item.img_depois}" onclick="openLightbox('${item.img_depois}')" /></div>`;
+    html += '</div>';
+  }
+  if (item.img_anuncio) {
+    html += `<div class="cat-anuncio-block"><div class="cat-ad-label">Anúncio</div><img src="${item.img_anuncio}" onclick="openLightbox('${item.img_anuncio}')" /></div>`;
+  }
+  imgsEl.innerHTML = html;
+
+  document.getElementById('cat-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCatModalDirect() {
+  document.getElementById('cat-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeCatModal(e) {
+  if (e.target.id === 'cat-modal') closeCatModalDirect();
+}
+
 // ── Lightbox ──
 function openLightbox(src) {
   const lb = document.getElementById('lightbox');
@@ -214,7 +293,7 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'Escape') { closeLightbox(); closeCatModalDirect(); }
 });
 
 // ── Tema escuro/claro ──

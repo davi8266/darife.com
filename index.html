@@ -14,6 +14,8 @@
     <div class="logo">darife.com</div>
     <ul class="nav-links">
       <li><a href="#sobre">sobre</a></li>
+      <li><a href="#design">design</a></li>
+      <li><a href="#catalogo">catálogo</a></li>
       <li><a href="#projetos">projetos</a></li>
       <li><a href="#contato">contato</a></li>
       <li><button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">☀️</button></li>
@@ -86,6 +88,84 @@
       <!-- carregado dinamicamente -->
     </div>
   </section>
+
+  <!-- DESIGN & CNC -->
+  <section class="section" id="design">
+    <div class="section-label reveal">design & produção</div>
+    <div class="design-intro reveal">
+      <p>Além do desenvolvimento, atuo profissionalmente com <span>design gráfico e produção para maquinário CNC a laser</span> — criando desde os modelos técnicos até as fotos dos produtos.</p>
+    </div>
+    <div class="design-grid">
+      <div class="design-card reveal reveal-delay-1">
+        <div class="design-card-icon">✏️</div>
+        <h3>Modelagem CNC Laser</h3>
+        <p>Desenvolvimento de modelos vetoriais para corte e gravação a laser em maquinário CNC, utilizando CorelDraw. Peças técnicas com precisão e acabamento profissional.</p>
+        <div class="design-tags">
+          <span>CorelDraw</span>
+          <span>Vetorização</span>
+          <span>CNC Laser</span>
+        </div>
+      </div>
+      <div class="design-card reveal reveal-delay-2">
+        <div class="design-card-icon">📸</div>
+        <h3>Fotografia para E-commerce</h3>
+        <p>Produção e edição de fotos dos modelos CNC para anúncios em plataformas de e-commerce, com foco em destaque visual e conversão de vendas.</p>
+        <div class="design-tags">
+          <span>Adobe Photoshop</span>
+          <span>E-commerce</span>
+          <span>Edição</span>
+        </div>
+      </div>
+      <div class="design-card reveal reveal-delay-3">
+        <div class="design-card-icon">🏭</div>
+        <h3>Produção Industrial</h3>
+        <p>Trabalho em ambiente industrial acompanhando todo o fluxo — do arquivo vetorial ao produto finalizado, garantindo qualidade e fidelidade ao projeto.</p>
+        <div class="design-tags">
+          <span>Fluxo de produção</span>
+          <span>Controle de qualidade</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOGO -->
+  <section class="section" id="catalogo">
+    <div class="section-label reveal">catálogo & empresa</div>
+
+    <div class="empresa-box reveal" id="empresa-box">
+      <div class="empresa-logo-placeholder" id="empresa-emoji">🪵</div>
+      <div class="empresa-info">
+        <h2 class="empresa-nome" id="empresa-nome">Bella Art in Madeira LTDA</h2>
+        <p class="empresa-desc" id="empresa-desc"></p>
+        <div class="empresa-badges">
+          <span>CorelDraw</span>
+          <span>CNC Laser</span>
+          <span>Adobe Photoshop</span>
+          <span>E-commerce</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="catalogo-grid" id="catalogo-grid"></div>
+  </section>
+
+  <!-- MODAL CATALOGO -->
+  <div id="cat-modal" class="modal-overlay" onclick="closeCatModal(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeCatModalDirect()">×</button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-icon">🪵</div>
+          <div class="modal-header-text">
+            <h2 id="cat-modal-title"></h2>
+            <span id="cat-modal-tipo" class="modal-period"></span>
+          </div>
+        </div>
+        <p id="cat-modal-desc" class="modal-description"></p>
+        <div id="cat-modal-images" class="cat-modal-images"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- CONTATO -->
   <section class="section" id="contato">

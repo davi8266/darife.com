@@ -28,6 +28,8 @@
     <button class="tab active" onclick="switchTab('bio')">Bio & Sobre</button>
     <button class="tab" onclick="switchTab('skills')">Skills</button>
     <button class="tab" onclick="switchTab('projects')">Projetos</button>
+    <button class="tab" onclick="switchTab('empresa')">Empresa</button>
+    <button class="tab" onclick="switchTab('catalogo')">Catálogo</button>
     <button class="tab" onclick="switchTab('messages')">Mensagens</button>
   </div>
 
@@ -101,6 +103,46 @@
     </div>
     <div id="projects-list"></div>
     <button class="btn-add" onclick="addProject()">+ Adicionar novo projeto</button>
+  </div>
+
+  <!-- ── TAB: EMPRESA ── -->
+  <div class="panel" id="tab-empresa">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Empresa</div>
+          <div class="card-subtitle">Informações exibidas na seção catálogo</div>
+        </div>
+        <button class="btn-save" onclick="saveEmpresa()">Salvar</button>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nome da empresa</label>
+          <input type="text" id="emp-nome" placeholder="Ex: Bella Art in Madeira LTDA" />
+        </div>
+        <div class="form-group">
+          <label>Emoji / Ícone</label>
+          <input type="text" id="emp-emoji" placeholder="🪵" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Descrição</label>
+        <textarea id="emp-desc" style="min-height:120px;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB: CATÁLOGO ── -->
+  <div class="panel" id="tab-catalogo">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+      <div>
+        <div style="font-size:0.95rem;font-weight:700;">Catálogo</div>
+        <div style="font-family:var(--mono);font-size:0.7rem;color:#aaa;">Imagens exibidas na galeria do portfólio</div>
+      </div>
+      <button class="btn-save" onclick="saveCatalogo()">Salvar</button>
+    </div>
+    <div id="catalogo-list"></div>
+    <button class="btn-add" onclick="addCatalogo()">+ Adicionar imagem</button>
   </div>
 
   <!-- ── TAB: MESSAGES ── -->

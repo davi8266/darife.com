@@ -42,6 +42,8 @@
     await loadSkills();
     await loadProjects();
     await loadMessages();
+    await loadEmpresa();
+    await loadCatalogo();
   }
 
   // ── BIO ──
@@ -232,6 +234,113 @@
         <div class="message-text">${m.message}</div>
       </div>
     `).join('');
+  }
+
+  // ── EMPRESA ──
+  async function loadEmpresa() {
+    const { data } = await sb.from('empresa').select('*').single();
+    if (!data) return;
+    document.getElementById('emp-nome').value = data.nome || '';
+    document.getElementById('emp-desc').value = data.descricao || '';
+    document.getElementById('emp-emoji').value = data.emoji || '🪵';
+  }
+
+  async function saveEmpresa() {
+    const payload = {
+      nome: document.getElementById('emp-nome').value,
+      descricao: document.getElementById('emp-desc').value,
+      emoji: document.getElementById('emp-emoji').value,
+    };
+    const { data } = await sb.from('empresa').select('id').single();
+    if (data) {
+      await sb.from('empresa').update(payload).eq('id', data.id);
+    } else {
+      await sb.from('empresa').insert({ ...payload, id: 1 });
+    }
+    showToast('✓ Empresa salva!');
+  }
+
+  // ── CATÁLOGO ──
+  let catalogoItems = [];
+
+  async function loadCatalogo() {
+    const { data } = await sb.from('catalogo').select('*').order('order');
+    catalogoItems = data || [];
+    renderCatalogo();
+  }
+
+  function renderCatalogo() {
+    const el = document.getElementById('catalogo-list');
+    if (catalogoItems.length === 0) {
+      el.innerHTML = '<p style="font-family:var(--mono);font-size:0.8rem;color:#aaa;text-align:center;padding:2rem;">Nenhum item ainda. Clique em + Adicionar.</p>';
+      return;
+    }
+    el.innerHTML = catalogoItems.map((item, i) => `
+      <div class="project-item">
+        <div class="project-item-header">
+          <span class="project-num">ITEM ${i + 1}</span>
+          <button class="btn-danger" onclick="removeCatalogo(${i})">Remover</button>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Título</label>
+            <input type="text" value="${item.titulo || ''}" onchange="catalogoItems[${i}].titulo = this.value" placeholder="Ex: Quadro Mandala" />
+          </div>
+          <div class="form-group">
+            <label>Tipo</label>
+            <select onchange="catalogoItems[${i}].tipo = this.value">
+              <option value="produto" ${item.tipo === 'produto' ? 'selected' : ''}>Produto</option>
+              <option value="antes-depois" ${item.tipo === 'antes-depois' ? 'selected' : ''}>Antes & Depois</option>
+              <option value="anuncio" ${item.tipo === 'anuncio' ? 'selected' : ''}>Anúncio</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Descrição (opcional)</label>
+          <textarea onchange="catalogoItems[${i}].descricao = this.value" placeholder="Descreva o produto...">${item.descricao || ''}</textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>📷 Imagem Antes</label>
+            <input type="url" value="${item.img_antes || ''}" onchange="catalogoItems[${i}].img_antes = this.value" placeholder="https://..." />
+          </div>
+          <div class="form-group">
+            <label>✨ Imagem Depois</label>
+            <input type="url" value="${item.img_depois || ''}" onchange="catalogoItems[${i}].img_depois = this.value" placeholder="https://..." />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>🛒 Foto do Anúncio</label>
+          <input type="url" value="${item.img_anuncio || ''}" onchange="catalogoItems[${i}].img_anuncio = this.value" placeholder="https://..." />
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function addCatalogo() {
+    catalogoItems.push({ tipo: 'produto', titulo: '', imagem: '', order: catalogoItems.length });
+    renderCatalogo();
+  }
+
+  function removeCatalogo(i) {
+    catalogoItems.splice(i, 1);
+    renderCatalogo();
+  }
+
+  async function saveCatalogo() {
+    await sb.from('catalogo').delete().gte('id', 0);
+    const rows = catalogoItems.map((item, i) => ({
+      id: item.id || (i + 1),
+      tipo: item.tipo || 'produto',
+      titulo: item.titulo || '',
+      descricao: item.descricao || '',
+      img_antes: item.img_antes || '',
+      img_depois: item.img_depois || '',
+      img_anuncio: item.img_anuncio || '',
+      order: i
+    }));
+    if (rows.length > 0) await sb.from('catalogo').upsert(rows, { onConflict: 'id' });
+    showToast('✓ Catálogo salvo!');
   }
 
   init();
