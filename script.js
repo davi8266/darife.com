@@ -26,7 +26,6 @@ async function loadBio() {
   if (data.email) {
     const el = document.getElementById('contact-email');
     el.href = 'mailto:' + data.email;
-    el.querySelector('svg').insertAdjacentText('afterend', ' ' + data.email);
     el.lastChild.textContent = ' ' + data.email;
   }
 }
@@ -131,6 +130,24 @@ async function sendMessage() {
     btn.textContent = 'Enviar mensagem →';
   }
 }
+
+// ── Tema escuro/claro ──
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const newTheme = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  document.getElementById('theme-toggle').textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('theme', newTheme);
+}
+
+function initTheme() {
+  const saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = saved === 'dark' ? '🌙' : '☀️';
+}
+
+initTheme();
 
 // Inicia
 loadSite();
